@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- Makes mobile work properly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>School Vending Support</title>
+
+    <!-- Pico CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+
+<link rel="stylesheet" href="style.css">
+
+
+  
+  <body>
+    <main class="container">
+      <section class="hero">
+
+    <img class="title_image" src="Images/title_image.gif" alt="title_image">
+
+    <img class="mascot" src="Images/dancing_sandwich.gif" alt="mascot_image">
+
+    <div class="hero-text">
+        <h1>🥤 Group 1 Vending Machine Support</h1>
+        <p>Need Fast Help for Group 1's Vending Machine? We got you Covered!</p>
+    </div>
+
+</section>
+
+      <h1>IMPORTANT NOTE!</h1>
+      <p>Any Troll Messages, or Spamming will Block you from using this website!</p>
+
+
+      <article>
+        <h2>Sections</h2>
+        <ul>
+          <li>Menu</li>
+          <li>Machine Status</li>
+          <li>Report a Problem</li>
+          <li>Suggest a Snack</li>
+          <li>Ask any Questions</li>
+
+        </ul>
+
+      </article>
+
+      <article>
+        <h2>Menu</h2>
+
+          <img class="menu_image" src="Images/Menu.png" alt="menu_image" width = 300px height = auto>
+      </article>
+
+      <!-- Machine Status Card -->
+      <article>
+        <h2>Machine Status</h2>
+
+        <p id="status">✅ Machine is operating normally</p>
+
+        <button onclick="toggleStatus()">Toggle Status (Demo)</button>
+      </article>
+
+      <!-- Report Button -->
+      <article>
+        <h2>Report a Problem</h2>
+
+        <p>Facing an issue? Let us know the details below:</p>
+        <h3>Most Common Issues:</h3>
+        <ul>
+          <li>Coin stuck in vending machine</li>
+          <li>Payment not working</li>
+          <li>Item did not dispense</li>
+          <li>Vending Machine not turning</li>
+
+        </ul>
+
+        <h3>Additional Details</h3>
+            <li>We'll need your name in case we need to verify you
+                if you lost money, or if a <br> product did not dispense properly
+                to make sure no imposters are trying to take your money/product <br>
+            </li>
+        <input
+            type="text"
+            id="reportInput"
+            placeholder="Describe the issue you're facing"
+          />
+
+          <input
+            type="text"
+            id="reporterName"
+            placeholder="Please enter your name"
+          />
+
+          <input
+            type="text"
+            id="reporterContact"
+            placeholder="Please enter your contact information"
+          />
+
+          <p id="reportMessage"></p>
+
+        <button onclick="reportProblem()">
+            Submit the Issue
+        </button>
+      </article>
+
+      <!-- Suggestions -->
+      <article>
+        <h2>Suggest a Snack</h2>
+
+        <input type="text" id="snackInput" placeholder="What should we add?" />
+
+        <button onclick="submitSnack()">Submit</button>
+
+        <p id="thanksMessage"></p>
+      </article>
+
+      <article>
+        <h2>Ask us any (sensible) Questions!</h2>
+
+        <input type="text" id="anyQuestion" placeholder="Ask us any question!" />
+        <input type="text" id="contactQuestion" placeholder="Please leave a contact if you want us to answer back" />
+
+        <button onclick = "submitQuestion()">Submit Question</button>
+
+        <p id="questionThanks"></p>
+
+      </article>
+    </main>
+
+    <script src="script.js" defer></script>
+
+    
+  </body>
+  
+</html>
