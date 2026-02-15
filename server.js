@@ -27,7 +27,8 @@ app.post("/report", async (req, res) => {
     //Save to file
     fs.appendFileSync(
         "reports.txt",
-        `Name: ${data.name}
+        `IP: ${userIP}
+        Name: ${data.name}
 Issue: ${data.issue}
 Contact: ${data.contact}
 ------------------\n`
@@ -40,7 +41,7 @@ Contact: ${data.contact}
         body: JSON.stringify({
             content:
 `🚨 New Vending Machine Report!
-
+IP: ${userIP}
 Name: ${data.name}
 Issue: ${data.issue}
 Contact: ${data.contact}`
@@ -54,4 +55,5 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 
 });
+
 
