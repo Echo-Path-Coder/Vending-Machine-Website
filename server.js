@@ -27,6 +27,9 @@ app.get("/", (req, res) => {
 app.post("/report", async (req, res) => {
   console.log("Report route triggered");
 
+  const time = Date.now()
+  const formattedTime = `${now.getMonth() + 1}/${now.getDate()}/${now.getFullYear()}`;
+
   const { name, issue, contact } = req.body;
   const userIP = req.ip;
 
@@ -44,6 +47,7 @@ app.post("/report", async (req, res) => {
     fs.appendFileSync(
       "reports.txt",
 `IP: ${userIP}
+Time: ${formattedTime}
 Name: ${name}
 Issue: ${issue}
 Contact: ${contact}
@@ -56,7 +60,7 @@ Contact: ${contact}
       body: JSON.stringify({
         content:
 `🚨 New Vending Machine Report!
-IP: ${userIP}
+Time: ${formattedTime}
 Name: ${name}
 Issue: ${issue}
 Contact: ${contact}`
@@ -74,5 +78,6 @@ Contact: ${contact}`
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
