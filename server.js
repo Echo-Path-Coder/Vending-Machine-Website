@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const app = express();
 
-// REQUIRED for Render to get real IP
+// Render to get real IP
 app.set("trust proxy", true);
 
 app.use(cors());
@@ -12,14 +12,15 @@ app.use(express.json());
 
 const blockedIPs = [];
 
-const WEBHOOK_URL = process.env.WEBHOOK_URL; // safer
+//Discord's webhook
+const WEBHOOK_URL = process.env.WEBHOOK_URL; 
 
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 const PORT = process.env.PORT || 3000;
 
-// Test route so you don't see Cannot GET
+// Test route 
 app.get("/", (req, res) => {
   res.send("Server is running.");
 });
@@ -27,8 +28,9 @@ app.get("/", (req, res) => {
 app.post("/report", async (req, res) => {
   console.log("Report route triggered");
 
+  // Get the times needed
   const time = new Date()
-  const formattedTime = `${time.getMonth() + 1}/${time.getDate()}/${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
+  const formattedTime = `${time.getMonth() + 1}/${time.getDate()}/${time.getFullYear()}`;
 
 
   const { name, issue, contact } = req.body;
@@ -37,11 +39,11 @@ app.post("/report", async (req, res) => {
   console.log("IP:", userIP);
 
   if (!name || !issue || !contact) {
-    return res.status(400).send("Missing fields.");
+    return res.status(400).send("Missing fields the input fields in Report Problem.");
   }
 
   if (blockedIPs.includes(userIP)) {
-    return res.status(403).send("You are blocked.");
+    return res.status(403).send("You are blocked");
   }
 
   try {
@@ -79,6 +81,7 @@ Contact: ${contact}`
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
 
