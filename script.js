@@ -71,27 +71,30 @@ async function reportProblem() {
         message.textContent += "✅ Report submitted successfully!" + " Problem: " + issue + " Reporter: " + name + " Contact: " + contact;
        alert("Thank you for your report! We will look into the issue as soon as possible!");
 
-       const WEBHOOK_URL = "https://discord.com/api/webhooks/1471721082003132609/WUEHz65AwlJE0Hz7_G5LIvWZ4-O4oRnH581MGiSdMEO4uTL1dbpCr4EggRitvKeYE0Gr"
-    try{
-        await fetch(WEBHOOK_URL, {
+    try {
+
+        const response = await fetch("https://vending-machine-website-fibj.onrender.com/report", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                content: `🚨 New Vending Machine Report!
-
-Problem: ${issue}
-Reporter: ${name}
-Contact: ${contact}`
+                issue,
+                name,
+                contact
             })
         });
 
-        alert("Report sent successfully!");
+        if (response.ok) {
+            alert("Report submitted successfully!");
+        } else {
+            const errorText = await response.text();
+            alert("Error: " + errorText);
+        }
 
-    } catch(error){
+    } catch (error) {
         console.error(error);
-        alert("Error sending report." + error);
+        alert("Could not connect to server.");
     }
     
     }
@@ -163,3 +166,4 @@ function adminLogin() {
     }
 }
 }
+
