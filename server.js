@@ -28,7 +28,8 @@ app.post("/report", async (req, res) => {
   console.log("Report route triggered");
 
   const time = new Date()
-  const formattedTime = `${time.getMonth() + 1}/${time.getDate()}/${time.getFullYear()}`;
+  const formattedTime = `${time.getMonth() + 1}/${time.getDate()}/${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
+
 
   const { name, issue, contact } = req.body;
   const userIP = req.ip;
@@ -78,6 +79,7 @@ Contact: ${contact}`
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
 
