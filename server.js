@@ -3,57 +3,76 @@ const fs = require("fs");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());    
+
+// REQUIRED for Render to get real IP
+app.set("trust proxy", true);
+
+app.use(cors());
 app.use(express.json());
 
-const blockedIPs = []
+const blockedIPs = [];
 
-const WEBHOOK_URL = "https://discord.com/api/webhooks/1471721082003132609/WUEHz65AwlJE0Hz7_G5LIvWZ4-O4oRnH581MGiSdMEO4uTL1dbpCr4EggRitvKeYE0Gr";
+const WEBHOOK_URL = process.env.WEBHOOK_URL; // safer
 
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fetch = (...args) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 const PORT = process.env.PORT || 3000;
 
+// Test route so you don't see Cannot GET
+app.get("/", (req, res) => {
+  res.send("Server is running.");
+});
+
 app.post("/report", async (req, res) => {
+  console.log("Report route triggered");
 
-    const data = req.body;
+  const { name, issue, contact } = req.body;
+  const userIP = req.ip;
 
-    const userIP = req.ip;
+  console.log("IP:", userIP);
 
-    if (blockedIPs.includes(userIP)) {
-        return res.status(403).send("You are blocked from using this website.");
-    }
-    
-    //Save to file
+  if (!name || !issue || !contact) {
+    return res.status(400).send("Missing fields.");
+  }
+
+  if (blockedIPs.includes(userIP)) {
+    return res.status(403).send("You are blocked.");
+  }
+
+  try {
     fs.appendFileSync(
-        "reports.txt",
-        `IP: ${userIP}
-        Name: ${data.name}
-Issue: ${data.issue}
-Contact: ${data.contact}
+      "reports.txt",
+`IP: ${userIP}
+Name: ${name}
+Issue: ${issue}
+Contact: ${contact}
 ------------------\n`
     );
 
-    //Send to Discord
     await fetch(WEBHOOK_URL, {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({
-            content:
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content:
 `🚨 New Vending Machine Report!
 IP: ${userIP}
-Name: ${data.name}
-Issue: ${data.issue}
-Contact: ${data.contact}`
-        })
+Name: ${name}
+Issue: ${issue}
+Contact: ${contact}`
+      })
     });
 
     res.sendStatus(200);
+
+  } catch (error) {
+    console.error("ERROR:", error);
+    res.status(500).send("Server error.");
+  }
 });
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-
 });
 
 
