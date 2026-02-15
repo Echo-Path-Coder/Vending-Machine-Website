@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
 app.post("/report", async (req, res) => {
   console.log("Report route triggered");
 
-  const time = Date.now()
+  const time = new Date()
   const formattedTime = `${now.getMonth() + 1}/${now.getDate()}/${now.getFullYear()}`;
 
   const { name, issue, contact } = req.body;
@@ -78,6 +78,7 @@ Contact: ${contact}`
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
 
