@@ -8,14 +8,6 @@ app.use(express.json());
 
 const blockedIPs = []
 
-const rateLimit = require("express-rate-limit");
-
-const limiter = rateLimit({
-    windowMs: 60 * 1000, // 1 minute
-    max: 5,              // 5 requests per minute for each IP address
-    message: "Too many reports. Please wait."
-});
-
 const WEBHOOK_URL = "https://discord.com/api/webhooks/1471721082003132609/WUEHz65AwlJE0Hz7_G5LIvWZ4-O4oRnH581MGiSdMEO4uTL1dbpCr4EggRitvKeYE0Gr";
 
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
@@ -62,3 +54,4 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 
 });
+
