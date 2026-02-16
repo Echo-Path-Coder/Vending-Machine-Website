@@ -15,6 +15,8 @@ const blockedIPs = [];
 //Discord's webhook
 const WEBHOOK_URL = process.env.WEBHOOK_URL; 
 
+const SNACK_WEBHOOK = process.env.SNACK_WEBHOOK;
+
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
@@ -96,9 +98,8 @@ app.post("/snack", async (req, res) => {
         content:
 `🍫 New Snack Suggestion
 
-IP: ${userIP}
-Name: ${name}
 Snack: ${snackName}
+Name: ${name}
 Reason: ${reason}`
       })
     });
@@ -114,6 +115,7 @@ Reason: ${reason}`
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
 
