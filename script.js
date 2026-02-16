@@ -160,9 +160,9 @@ async function submitSnack() {
 }
 
 async function submitQuestion(){
-    let question = document.getElementById("anyQuestion").value()
-    let contact = document.getElementById("contactQuestion").value()
-    let name = document.getElementById("questionName").value()
+    let question = document.getElementById("anyQuestion").value;
+    let contact = document.getElementById("contactQuestion").value;
+    let name = document.getElementById("questionName").value;
     let thanks = document.getElementById("questionThanks")
 
     if(question.trim() != "" && name.trim() != "" && contact.trim() != ""){
@@ -225,6 +225,7 @@ function adminLogin() {
     }
 }
 }
+
 
 
 
