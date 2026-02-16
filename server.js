@@ -78,9 +78,43 @@ Contact: ${contact}`
   }
 });
 
+app.post("/snack", async (req, res) => {
+
+  const { name, snackName, reason } = req.body;
+  const userIP = req.ip;
+
+  if (!snackName || !reason) {
+    return res.status(400).send("Missing fields.");
+  }
+
+  try {
+
+    await fetch(SNACK_WEBHOOK, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content:
+`🍫 New Snack Suggestion
+
+IP: ${userIP}
+Name: ${name}
+Snack: ${snackName}
+Reason: ${reason}`
+      })
+    });
+
+    res.sendStatus(200);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error.");
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
 
