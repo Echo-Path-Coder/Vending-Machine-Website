@@ -10,7 +10,7 @@ app.set("trust proxy", true);
 app.use(cors());
 app.use(express.json());
 
-const blockedIPs = ["207.34.93.5"];
+const blockedIPs = [];
 
 //Discord's webhook
 const WEBHOOK_URL = process.env.WEBHOOK_URL; 
@@ -81,6 +81,7 @@ Contact: ${contact}`
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
 
