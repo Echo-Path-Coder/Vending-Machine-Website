@@ -112,9 +112,42 @@ Reason: ${reason}`
   }
 });
 
+app.post("/question", async (req, res) => {
+
+  const { question, name, contact } = req.body;
+  const userIP = req.ip;
+
+  if (!question || !contact) {
+    return res.status(400).send("Missing fields.");
+  }
+
+  try {
+
+    await fetch(QUESTION_WEBHOOK, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content:
+`❓ New Question!
+
+Question: ${question}
+Name: ${name}
+Contact: ${contact}`
+      })
+    });
+
+    res.sendStatus(200);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error.");
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
 
