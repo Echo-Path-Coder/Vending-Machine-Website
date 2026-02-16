@@ -165,9 +165,9 @@ async function submitQuestion(){
     let name = document.getElementById("questionName").value()
     let thanks = document.getElementById("questionThanks")
 
-    if(question.value.trim() != "" && name.value.trim() != "" && contact.value.trim() != ""){
+    if(question.trim() != "" && name.trim() != "" && contact.trim() != ""){
         thanks.textContent = ""
-        thanks.textContent += "We have received the question: " + question.value + " Your Name: " + name + " Your contact: " + contact
+        thanks.textContent += "We have received the question: " + question + " .Your Name: " + name + " .Your contact: " + contact
 
         alert("Thank you for your question! We'll try to answer it as best as we can!")
 
@@ -225,6 +225,7 @@ function adminLogin() {
     }
 }
 }
+
 
 
 
