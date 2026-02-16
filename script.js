@@ -108,16 +108,51 @@ async function reportProblem() {
 
 function submitSnack() {
 
-    let input = document.getElementById("snackInput");
+    let snackName = document.getElementById("snackInput");
+    let name = document.getElementById("suggestName")
+    let reason = document.getElementById("suggestReason")
     let thanks = document.getElementById("thanksMessage");
 
-    if (input.value.trim() != "") {
+    const now = Date.now();
+    if (now - lastSent < 10000) { // 10 seconds timer
+        alert("Please wait a moment before sending another message.");
+        return;
+    }
+    lastSent = now;
+
+    if (snackName.value.trim() != "" && name.value.trim() != "" && reason.value.trim() != "") {
 
         thanks.textContent = "";
         thanks.textContent += 
-        "✅ Suggestion received: " + input.value;
+        "✅ Suggestion received: " + snackName.value + ". Name: " + name.value + ". Reason: " + reason.value;
         alert("Thank you for your suggestion! We will consider adding it to our vending machine selection.");
-        input.value = "";
+
+        try {
+
+        const response = await fetch("https://vending-machine-website-fibj.onrender.com/snack", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                snackName,
+                name,
+                reason
+            })
+        });
+
+        if (response.ok) {
+            alert("Report submitted successfully!");
+        } else {
+            const errorText = await response.text();
+            alert("Error: " + errorText);
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert("Could not connect to server.");
+    }
+    
     }
     else {
         thanks.textContent = "⚠️ Please enter a snack suggestion.";
@@ -166,4 +201,5 @@ function adminLogin() {
     }
 }
 }
+
 
