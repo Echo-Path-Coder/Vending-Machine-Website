@@ -106,7 +106,7 @@ async function reportProblem() {
 
 }
 
-function submitSnack() {
+async function submitSnack() {
 
     let snackName = document.getElementById("snackInput");
     let name = document.getElementById("suggestName")
@@ -201,5 +201,6 @@ function adminLogin() {
     }
 }
 }
+
 
 
