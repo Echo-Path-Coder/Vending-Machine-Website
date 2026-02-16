@@ -159,21 +159,45 @@ async function submitSnack() {
     }
 }
 
-function submitQuestion(){
-    let question = document.getElementById("anyQuestion")
+async function submitQuestion(){
+    let question = document.getElementById("anyQuestion").value()
+    let contact = document.getElementById("contactQuestion").value()
+    let name = document.getElementById("questionName").value()
     let thanks = document.getElementById("questionThanks")
-    let contact = document.getElementById("contactQuestion")
 
-    if(question.value.trim() != ""){
+    if(question.value.trim() != "" && name.value.trim() != "" && contact.value.trim() != ""){
         thanks.textContent = ""
-        thanks.textContent += "We have received the question: " + question.value
-        
-        if(contact.value.trim() != ""){
-            thanks.textContact += "Your contact: " + contact;
-        }
+        thanks.textContent += "We have received the question: " + question.value + " Your Name: " + name + " Your contact: " + contact
 
         alert("Thank you for your question! We'll try to answer it as best as we can!")
+
+        try {
+
+        const response = await fetch("https://vending-machine-website-fibj.onrender.com/question", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                question,
+                name,
+                contact
+            })
+        });
+
+        if (response.ok) {
+            alert("Question submitted successfully!");
+        } else {
+            const errorText = await response.text();
+            alert("Error: " + errorText);
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert("Could not connect to server.");
     }
+    }
+        
     else{
         thanks.textContent = ""
         thanks.textContent += "You did not submit a question"
@@ -201,6 +225,7 @@ function adminLogin() {
     }
 }
 }
+
 
 
 
