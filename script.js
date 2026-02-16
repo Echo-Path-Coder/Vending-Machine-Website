@@ -124,7 +124,7 @@ async function submitSnack() {
 
         thanks.textContent = "";
         thanks.textContent += 
-        "✅ Suggestion received: " + snackName.value + ". Name: " + name.value + ". Reason: " + reason.value;
+        "✅ Suggestion received: " + snackName + ". Name: " + name + ". Reason: " + reason;
         alert("Thank you for your suggestion! We will consider adding it to our vending machine selection.");
 
         try {
@@ -201,6 +201,7 @@ function adminLogin() {
     }
 }
 }
+
 
 
 
