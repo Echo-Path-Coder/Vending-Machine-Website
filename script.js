@@ -108,9 +108,9 @@ async function reportProblem() {
 
 async function submitSnack() {
 
-    let snackName = document.getElementById("snackInput");
-    let name = document.getElementById("suggestName")
-    let reason = document.getElementById("suggestReason")
+    let snackName = document.getElementById("snackInput").value;
+    let name = document.getElementById("suggestName").value;
+    let reason = document.getElementById("suggestReason").value;
     let thanks = document.getElementById("thanksMessage");
 
     const now = Date.now();
@@ -120,7 +120,7 @@ async function submitSnack() {
     }
     lastSent = now;
 
-    if (snackName.value.trim() != "" && name.value.trim() != "" && reason.value.trim() != "") {
+    if (snackName.trim() != "" && name.trim() != "" && reason.trim() != "") {
 
         thanks.textContent = "";
         thanks.textContent += 
@@ -201,6 +201,7 @@ function adminLogin() {
     }
 }
 }
+
 
 
 
