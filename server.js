@@ -17,6 +17,8 @@ const WEBHOOK_URL = process.env.WEBHOOK_URL;
 
 const SNACK_WEBHOOK = process.env.SNACK_WEBHOOK;
 
+const QUESTION_WEBHOOK = process.env.QUESTION_WEBHOOK;
+
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
@@ -147,6 +149,7 @@ Contact: ${contact}`
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
 
