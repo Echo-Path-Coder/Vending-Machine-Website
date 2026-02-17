@@ -10,8 +10,6 @@ function toggleStatus() {
 
     if (working) {
         status.textContent = "✅ Machine is operating normally";
-    } else {
-        status.textContent = "⚠️ Machine may be empty or out of order";
     }
 }
 
@@ -225,6 +223,7 @@ function adminLogin() {
     }
 }
 }
+
 
 
 
