@@ -3,6 +3,25 @@ const fs = require("fs");
 const cors = require("cors");
 
 const app = express();
+const rateLimit = require("express-rate-limit");
+
+const reportLimiter = rateLimit({
+  windowMs: 30 * 60 * 1000, // 30 minutes
+  max: 5, // limit each IP to 5 requests per window
+  message: "Too many submissions. Try again in 30 minutes."
+});
+
+const snackLimiter = rateLimit({
+  windowMs: 30 * 60 * 1000, // 30 minutes
+  max: 5, // limit each IP to 5 requests per window
+  message: "Too many submissions. Try again in 30 minutes."
+});
+
+const questionLimiter = rateLimit({
+  windowMs: 30 * 60 * 1000, // 30 minutes
+  max: 5, // limit each IP to 5 requests per window
+  message: "Too many submissions. Try again in 30 minutes."
+});
 
 // Render to get real IP
 app.set("trust proxy", true);
@@ -29,7 +48,7 @@ app.get("/", (req, res) => {
   res.send("Server is running.");
 });
 
-app.post("/report", async (req, res) => {
+app.post("/report", reportLimiter, async (req, res) => {
   console.log("Report route triggered");
 
   // Get the times needed
@@ -82,7 +101,8 @@ Contact: ${contact}`
   }
 });
 
-app.post("/snack", async (req, res) => {
+
+app.post("/snack", snackLimiter, async (req, res) => {
 
   const { name, snackName, reason } = req.body;
   const userIP = req.ip;
@@ -114,7 +134,7 @@ Reason: ${reason}`
   }
 });
 
-app.post("/question", async (req, res) => {
+app.post("/question", questionLimiter, async (req, res) => {
 
   const { question, name, contact } = req.body;
   const userIP = req.ip;
@@ -149,6 +169,7 @@ Contact: ${contact}`
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
 
