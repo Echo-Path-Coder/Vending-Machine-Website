@@ -103,9 +103,12 @@ Contact: ${contact}`
 
 
 app.post("/snack", snackLimiter, async (req, res) => {
+  console.log("Snack route triggered");
 
   const { name, snackName, reason } = req.body;
   const userIP = req.ip;
+
+  console.log("IP: " + userIP); 
 
   if (!snackName || !reason) {
     return res.status(400).send("Missing fields.");
@@ -135,9 +138,12 @@ Reason: ${reason}`
 });
 
 app.post("/question", questionLimiter, async (req, res) => {
+  console.log("Question route triggered");
 
   const { question, name, contact } = req.body;
   const userIP = req.ip;
+
+  console.log("IP: ", userIP);
 
   if (!question || !contact) {
     return res.status(400).send("Missing fields.");
@@ -169,6 +175,7 @@ Contact: ${contact}`
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
 
