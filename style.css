@@ -61,10 +61,23 @@ main.container {
 }
 
 .mascot{
-    position:absolute;
+    position: absolute;
     top:25%;
     left:80%;
 
     width:15%;
-    height:auto;
+    height: auto;
+
+}
+
+.neon {
+  font-family: 'Playwrite Cuba Guides', sans-serif;
+  font-size: 3rem;
+  color: #ffffff;
+  text-shadow:
+    0 0 5px #1a01f7,
+    0 0 10px #0511ff,
+    0 0 20px #0511ff,
+    0 0 40px #0511ff,
+    0 0 80px #0511ff;
 }
