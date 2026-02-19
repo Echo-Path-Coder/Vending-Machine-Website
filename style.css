@@ -55,7 +55,7 @@ main.container {
     color: white;
     text-align: center;
 
-    background: rgba(0,0,0,0.45);
+    background: rgba(2, 3, 59, 0.75);
     padding: 20px;
     border-radius: 16px;
 }
@@ -80,4 +80,5 @@ main.container {
     0 0 40px #0511ff,
     0 0 80px #0511ff;
 }
+
 
