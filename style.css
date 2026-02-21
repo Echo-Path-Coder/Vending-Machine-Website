@@ -20,14 +20,9 @@ body{
 }
 
 article{
-    background:
-        repeating-linear-gradient(
-            -15deg,
-            #330780 0px,
-            #0a013d 72px,
-            #25d3f6 0px,
-            #3b82f6 8px
-        );
+    background: linear-gradient(-45deg, #04d0d7, #34014c, #010a70);
+background-size: 400% 400%;
+animation: gradientMove 25s ease infinite;
 
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
@@ -35,6 +30,11 @@ article{
     border: 3px solid rgba(255,255,255,0.25);
     border-radius:36px;
     
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .article_text{
@@ -99,13 +99,29 @@ main.container {
 .neon {
   font-family: 'Orbitron', sans-serif;
   color: #ffffff;
-  text-shadow:
-    0 0 5px #1a01f7,
-    0 0 10px #0511ff,
-    0 0 20px #0511ff,
-    0 0 40px #0511ff,
-    0 0 80px #0511ff;
+    animation: flicker_float 3s infinite;
 }
+@keyframes flicker_float {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow:
+      0 0 5px #1a01f7,
+      0 0 10px #0511ff,
+      0 0 20px #0511ff,
+      0 0 40px #0511ff,
+      0 0 80px #0511ff;
+  }
+
+  20%, 24%, 55% {
+    text-shadow:
+      0 0 2px #020736,
+      0 0 5px #06f6d6,
+      0 0 10px #e3e4f0;
+  }
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-3px); }
+  100% { transform: translateY(0px); }
+}
+
 
 .title_text {
   font-family: 'Rajdhani', sans-serif;
@@ -130,6 +146,7 @@ main.container {
     padding: 20px;
     border-radius: 16px;
 }
+
 
 
 
