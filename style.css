@@ -102,9 +102,9 @@ main.container {
     0 0 20px #0511ff,
     0 0 40px #0511ff,
     0 0 80px #0511ff;
-    animation: float 3s infinite;
+    animation: hover 3s infinite;
 }
-@keyframes float {
+@keyframes hover {
   0%   { transform: translateY(0px); }
   50%  { transform: translateY(-3px); }
   100% { transform: translateY(0px); }
@@ -134,6 +134,7 @@ main.container {
     padding: 20px;
     border-radius: 16px;
 }
+
 
 
 
