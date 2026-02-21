@@ -4,13 +4,11 @@ body{
     line-height:1.6;
 
     background:
-        repeating-linear-gradient(
-            45deg,
-            #040356 0px,
-            #0a013d 36px,
-            #25d3f6 0px,
-            #3b82f6 2px
-        );
+  linear-gradient(rgba(0,255,255,0.3) 3px, transparent 3px),
+  linear-gradient(90deg, rgba(3, 253, 219, 0.3) 3px, transparent 3px);
+background-size: 60px 60px;
+background-color: #000310;
+    
     font-family: 'Saira', sans-serif;
     text-shadow:
     0 0 3px #1101f7,
@@ -21,7 +19,7 @@ body{
 article{
     background: linear-gradient(-45deg, #04d0d7, #34014c, #010a70);
 background-size: 400% 400%;
-animation: gradientMove 20s ease infinite;
+animation: gradientMove 15s ease infinite;
 
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
@@ -136,6 +134,7 @@ main.container {
     padding: 20px;
     border-radius: 16px;
 }
+
 
 
 
