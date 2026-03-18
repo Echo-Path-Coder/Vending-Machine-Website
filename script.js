@@ -68,6 +68,7 @@ async function reportProblem() {
         message.textContent = "";
         message.textContent += "✅ Report submitted successfully!" + " Problem: " + issue + " Reporter: " + name + " Contact: " + contact;
        alert("Thank you for your report! We will look into the issue as soon as possible!");
+        alert("Please wait for the confirmation message (it might take 5-30 secs)!")
 
     try {
 
@@ -124,6 +125,7 @@ async function submitSnack() {
         thanks.textContent += 
         "✅ Suggestion received: " + snackName + ". Name: " + name + ". Reason: " + reason;
         alert("Thank you for your suggestion! We will consider adding it to our vending machine selection.");
+        alert("Please wait for the confirmation message (it might take 5-30 secs)!")
 
         try {
 
@@ -168,6 +170,7 @@ async function submitQuestion(){
         thanks.textContent += "We have received the question: " + question + " .Your Name: " + name + " .Your contact: " + contact
 
         alert("Thank you for your question! We'll try to answer it as best as we can!")
+        alert("Please wait for the confirmation message (it might take 5-30 secs)!")
 
         try {
 
